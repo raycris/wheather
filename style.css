@@ -1,0 +1,79 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+:root {
+  --backgroundBlue: hsl(200, 100%, 85%);
+  --darkBlue: hsl(200, 100%, 10%);
+}
+
+body {
+  color: var(--darkBlue);
+  margin: 0;
+  background: var(--backgroundBlue);
+  font-family: sans-serif;
+}
+
+.blurred{
+  filter: blur(3px);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  width: 50%;
+  margin: 0.5rem;
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  border-right: 2px solid var(--darkBlue);
+  justify-content: center;
+}
+
+.weather-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.weather-icon.large {
+  width: 80px;
+  height: 80px;
+}
+
+.header-current-temp {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.header-right {
+  gap: 0.5rem;
+  width: 50%;
+  display: grid;
+  justify-content: space-around;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
+}
+
+.info-group {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.label {
+  color: hsl(200, 100%, 20%);
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.value-sub-info{
+  font-size: .75rem;
+  font-weight: lighter;
+}
