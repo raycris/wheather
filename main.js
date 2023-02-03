@@ -1,16 +1,29 @@
+import "./style.css";
 import { ICON_MAP } from "./iconMap";
 import { getWeather } from "./weather";
 
-import "./style.css";
+navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
-getWeather(10, 10, Intl.DateTimeFormat().resolvedOptions().timeZone)
-  .then(renderWather)
-  .catch((e) => {
-    console.error(e);
-    alert("Error getting weather");
-  });
+function positionSuccess({ coords }) {
+  getWeather(
+    coords.latitude,
+    coords.longitude,
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  )
+    .then(renderWeather)
+    .catch((e) => {
+      console.error(e);
+      alert("Error getting weather");
+    });
+}
 
-function renderWather({ current, daily, hourly }) {
+function positionError() {
+  alert(
+    "There was an error getting your location. Please allow us to use your location and refresh the page."
+  );
+}
+
+function renderWeather({ current, daily, hourly }) {
   renderCurrentWeather(current);
   renderDailyWeather(daily);
   renderHourlyWeather(hourly);
@@ -39,7 +52,7 @@ function renderCurrentWeather(current) {
 
 const DAY_FORMATTER = new Intl.DateTimeFormat(undefined, { weekday: "long" });
 const dailySection = document.querySelector("[data-day-section]");
-const dayCardTemplate = document.querySelector("#day-card-template");
+const dayCardTemplate = document.getElementById("day-card-template");
 function renderDailyWeather(daily) {
   dailySection.innerHTML = "";
   daily.forEach((day) => {
@@ -51,11 +64,9 @@ function renderDailyWeather(daily) {
   });
 }
 
-const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {
-  hour: "numeric",
-});
+const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, { hour: "numeric" });
 const hourlySection = document.querySelector("[data-hour-section]");
-const hourRowTemplate = document.querySelector("#hour-row-template");
+const hourRowTemplate = document.getElementById("hour-row-template");
 function renderHourlyWeather(hourly) {
   hourlySection.innerHTML = "";
   hourly.forEach((hour) => {
