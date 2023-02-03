@@ -27,12 +27,13 @@ function parseCurrentWeather({ current_weather, daily }) {
     windspeed: windSpeed,
     weathercode: iconCode,
   } = current_weather;
+
   const {
     temperature_2m_max: [maxTemp],
     temperature_2m_min: [minTemp],
     apparent_temperature_max: [maxFeelsLike],
     apparent_temperature_min: [minFeelsLike],
-    precipitation_sun: [precip],
+    precipitation_sum: [precip],
   } = daily;
 
   return {
